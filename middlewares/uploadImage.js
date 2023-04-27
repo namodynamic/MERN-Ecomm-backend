@@ -27,7 +27,7 @@ const uploadPhoto = multer({
 });
 
 const productImgResize = async (req, res, next) => {
-  if (!req.files) return next();
+  if (!req.files || !Array.isArray(req.files)) return next();
   await Promise.all(
     req.files.map(async (file) => {
       await sharp(file.path)
@@ -42,7 +42,7 @@ const productImgResize = async (req, res, next) => {
 };
 
 const blogImgResize = async (req, res, next) => {
-  if (!req.files) return next();
+  if (!req.files || !Array.isArray(req.files)) return next();
   await Promise.all(
     req.files.map(async (file) => {
       await sharp(file.path)
