@@ -4,8 +4,6 @@ const asyncHandler = require("express-async-handler");
 const slugify = require("slugify");
 const validateMongoDbId = require("../utils/validateMongodbid");
 
-const { mongo } = require("mongoose");
-
 //create a new product
 const createProduct = asyncHandler(async (req, res) => {
   try {
@@ -22,6 +20,7 @@ const createProduct = asyncHandler(async (req, res) => {
 //Update product
 const updateProduct = asyncHandler(async (req, res) => {
   const { id } = req.params;
+  validateMongoDbId(id);
   try {
     if (req.body.title) {
       req.body.slug = slugify(req.body.title);
@@ -38,6 +37,7 @@ const updateProduct = asyncHandler(async (req, res) => {
 //Delete product
 const deleteProduct = asyncHandler(async (req, res) => {
   const id = req.params.id;
+  validateMongoDbId(id);
   try {
     const deletedProduct = await Product.findOneAndDelete({ _id: id });
     res.json(deletedProduct);
@@ -49,8 +49,9 @@ const deleteProduct = asyncHandler(async (req, res) => {
 //Get a product
 const getaProduct = asyncHandler(async (req, res) => {
   const { id } = req.params;
+  validateMongoDbId(id);
   try {
-    const findProduct = await Product.findById(id);
+    const findProduct = await Product.findById(id).populate("color");
     res.json(findProduct);
   } catch (error) {
     throw new Error(error);
@@ -133,8 +134,8 @@ const addToWishlist = asyncHandler(async (req, res) => {
       );
       res.json(user);
     }
-  } catch (errror) {
-    throw new Error(errror);
+  } catch (error) {
+    throw new Error(error);
   }
 });
 

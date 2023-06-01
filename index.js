@@ -2,9 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const dbConnect = require("./config/dbConnect");
 const { notFound, errorHandler } = require("./middlewares/errorHandler");
-const { generateToken } = require("./config/jwtToken");
 const app = express();
-const dotenv = require("dotenv").config();
+const dotenv = require("dotenv");
 const PORT = process.env.PORT || 4000;
 const authRouter = require("./routes/authRoute");
 const productRouter = require("./routes/productRoute");
@@ -20,6 +19,7 @@ const cookieparser = require("cookie-parser");
 const morgan = require("morgan");
 const cors = require("cors");
 
+dotenv.config();
 dbConnect();
 
 app.use(morgan("dev"));
