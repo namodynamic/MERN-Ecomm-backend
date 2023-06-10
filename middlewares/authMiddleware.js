@@ -1,7 +1,7 @@
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 const asyncHandler = require("express-async-handler");
-require("dotenv").config();
+
 const authMiddleware = asyncHandler(async (req, res, next) => {
   let token;
   if (req?.headers?.authorization?.startsWith("Bearer ")) {
@@ -9,11 +9,12 @@ const authMiddleware = asyncHandler(async (req, res, next) => {
     try {
       if (token) {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        const user = await User.findById(decoded?.id);
+        const user = await User.findById(decoded.id);
         req.user = user;
         next();
       }
     } catch (error) {
+      console.log("Token Verification Error:", error);
       res.status(401).json({ message: "Token expired, please login again" });
     }
   } else {

@@ -18,43 +18,42 @@ const {
   saveAddress,
   userCart,
   getUserCart,
-  emptyCart,
-  applyCoupon,
   createOrder,
-  getOrders,
-  getAllOrders,
-  updateOrderStatus,
-  getOrderByUserId,
   removeProductFromCart,
   updateProductQuantityFromCart,
+  getMyOrders,
 } = require("../controller/userCtrl");
 const { authMiddleware, isAdmin } = require("../middlewares/authMiddleware");
 const { addToWishlist } = require("../controller/productCtrl");
+const { checkout, paymentVerification } = require("../controller/paymentCtrl");
+const { getMaxListeners } = require("../models/userModel");
 const router = express.Router();
 
 router.post("/register", createUser);
 
 router.post("/forgot-password", forgotPasswordToken);
 router.put("/reset-password/:token", resetPassword);
-router.put(
-  "/order/update-order/:id",
-  authMiddleware,
-  isAdmin,
-  updateOrderStatus
-);
+// router.put(
+//   "/order/update-order/:id",
+//   authMiddleware,
+//   isAdmin,
+//   updateOrderStatus
+// );
 router.put("/password", authMiddleware, updatePassword);
 router.post("/login", loginUserCtrl);
 router.post("/admin-login", loginAdmin);
 router.post("/cart", authMiddleware, userCart);
-router.post("/cart/applycoupon", authMiddleware, applyCoupon);
-router.post("/cart/cash-order", authMiddleware, createOrder);
+router.post("/order/checkout", authMiddleware, checkout);
+router.post("/order/paymentVerification", authMiddleware, paymentVerification);
+// router.post("/cart/applycoupon", authMiddleware, applyCoupon);
+router.post("/cart/create-order", authMiddleware, createOrder);
 router.post("/logout", logoutUser);
 
 router.get("/wishlist", authMiddleware, getWishlist);
 router.get("/cart", authMiddleware, getUserCart);
-router.get("/get-orders", authMiddleware, getOrders);
-router.get("/getAllorders", authMiddleware, isAdmin, getAllOrders);
-router.post("/getorderbyuser/:id", authMiddleware, isAdmin, getOrderByUserId);
+router.get("/getmyorders", authMiddleware, getMyOrders);
+// router.get("/getAllorders", authMiddleware, isAdmin, getAllOrders);
+// router.post("/getorderbyuser/:id", authMiddleware, isAdmin, getOrderByUserId);
 router.get("/all-users", getAllUsers);
 router.get("/refresh", handleRefreshToken);
 router.get("/:id", authMiddleware, isAdmin, getaUser);
@@ -74,7 +73,7 @@ router.delete(
   authMiddleware,
   removeProductFromCart
 );
-router.delete("/empty-cart", authMiddleware, emptyCart);
+// router.delete("/empty-cart", authMiddleware, emptyCart);
 router.delete("/:id", deleteaUser);
 
 module.exports = router;
