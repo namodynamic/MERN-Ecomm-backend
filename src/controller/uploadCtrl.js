@@ -3,7 +3,7 @@ const asyncHandler = require("express-async-handler");
 const {
   cloudinaryUploadImg,
   cloudinaryDeleteImg,
-} = require("../utils/cloudinary");
+} = require("../src/utils/cloudinary");
 
 const uploadImages = asyncHandler(async (req, res) => {
   try {

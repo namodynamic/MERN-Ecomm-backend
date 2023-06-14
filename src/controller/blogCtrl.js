@@ -1,8 +1,8 @@
 const Blog = require("../models/blogModel");
 const User = require("../models/userModel");
 const asyncHandler = require("express-async-handler");
-const validateMongoDbId = require("../utils/validateMongodbid");
-const cloudinaryUploadImg = require("../utils/cloudinary");
+const validateMongoDbId = require("../src/utils/validateMongodbid");
+const cloudinaryUploadImg = require("../src/utils/cloudinary");
 const fs = require("fs");
 
 const createBlog = asyncHandler(async (req, res) => {
