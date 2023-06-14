@@ -24,9 +24,9 @@ const {
   getMyOrders,
 } = require("../controller/userCtrl");
 const { authMiddleware, isAdmin } = require("../middlewares/authMiddleware");
-const { addToWishlist } = require("../controller/productCtrl");
+
 const { checkout, paymentVerification } = require("../controller/paymentCtrl");
-const { getMaxListeners } = require("../models/userModel");
+
 const router = express.Router();
 
 router.post("/register", createUser);
