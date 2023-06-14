@@ -25,12 +25,7 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieparser());
-
-const corsOptions = {
-  origin: "https://mermecomm.netlify.app",
-  optionsSuccessStatus: 200,
-};
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use("/api/user", authRouter);
 app.use("/api/product", productRouter);
