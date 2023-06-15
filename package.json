@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "BCRYPT_NO_NATIVE=1  node index.js"
+    "start": "node index.js",
+    "postbuild": "npm rebuild bcrypt --build-from-source"
   },
   "author": "",
   "license": "ISC",
