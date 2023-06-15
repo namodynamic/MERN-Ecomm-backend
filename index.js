@@ -1,4 +1,5 @@
-const express = require("express");
+import express from "express";
+// const express = require("express");
 const bodyParser = require("body-parser");
 const dbConnect = require("./config/dbConnect");
 const { notFound, errorHandler } = require("./middlewares/errorHandler");
