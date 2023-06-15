@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require("./node_modules/express");
 const bodyParser = require("body-parser");
 const dbConnect = require("./config/dbConnect");
 const { notFound, errorHandler } = require("./middlewares/errorHandler");
