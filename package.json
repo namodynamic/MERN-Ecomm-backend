@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "BCRYPT_NO_NATIVE=1  node index.js"
   },
   "author": "",
   "license": "ISC",
