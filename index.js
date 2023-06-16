@@ -21,6 +21,10 @@ const cors = require("cors");
 
 dbConnect();
 
+app.get("/", (req, res) => {
+  res.send("Welcome to the backend!");
+});
+
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
