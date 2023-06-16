@@ -29,7 +29,7 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieparser());
-app.use(cors());
+app.use(cors({ origin: "https://mermecomm.netlify.app" }));
 
 app.use("/api/user", authRouter);
 app.use("/api/product", productRouter);
