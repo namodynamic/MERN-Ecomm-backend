@@ -30,6 +30,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieparser());
 app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "https://mermecomm.netlify.app",
+      "https://mernecomm-admin.netlify.app",
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
 
 app.use("/api/user", authRouter);
 app.use("/api/product", productRouter);
