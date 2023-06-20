@@ -1,14 +1,12 @@
 const { default: mongoose } = require("mongoose");
 
+const dbUrl = process.env.MONGODB_URL || "mongodb://127.0.0.1:27017/Shoplify";
 const dbConnect = async () => {
   try {
-    await mongoose.connect(
-      process.env.MONGODB_URL || "mongodb://127.0.0.1:27017/Shoplify",
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      }
-    );
+    await mongoose.connect(dbUrl, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     console.log("Database connected successfully");
   } catch (error) {
     console.error("Database connection error:", error.message);
