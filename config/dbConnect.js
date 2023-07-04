@@ -1,9 +1,9 @@
 const { default: mongoose } = require("mongoose");
 
-const dbUrl = process.env.MONGODB_URL || "mongodb://127.0.0.1:27017/Shoplify";
 const dbConnect = async () => {
   try {
-    await mongoose.connect(dbUrl, {
+   
+    await mongoose.connect(process.env.MONGODB_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

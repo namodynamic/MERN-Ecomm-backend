@@ -3,7 +3,6 @@ const bodyParser = require("body-parser");
 const dbConnect = require("./config/dbConnect");
 const { notFound, errorHandler } = require("./middlewares/errorHandler");
 const app = express();
-const dotenv = require("dotenv").config();
 const PORT = process.env.PORT || 4000;
 const authRouter = require("./routes/authRoute");
 const productRouter = require("./routes/productRoute");
@@ -18,6 +17,9 @@ const couponRouter = require("./routes/couponRoute");
 const cookieparser = require("cookie-parser");
 const morgan = require("morgan");
 const cors = require("cors");
+require("dotenv").config()
+
+
 
 dbConnect();
 
@@ -30,17 +32,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieparser());
 app.use(cors());
-app.use(
-  cors({
-    origin: [
-      "https://mermecomm.netlify.app",
-      "https://mernecomm-admin.netlify.app",
-    ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
-  })
-);
 
 app.use("/api/user", authRouter);
 app.use("/api/product", productRouter);
@@ -59,3 +50,4 @@ app.use(errorHandler);
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
+

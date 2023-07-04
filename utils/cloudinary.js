@@ -1,4 +1,5 @@
 const cloudinary = require("cloudinary");
+require("dotenv").config()
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -22,6 +23,7 @@ const cloudinaryUploadImg = async (fileToUploads) => {
     });
   });
 };
+
 const cloudinaryDeleteImg = async (fileToDelete) => {
   return new Promise((resolve) => {
     cloudinary.uploader.destroy(fileToDelete, (result) => {
