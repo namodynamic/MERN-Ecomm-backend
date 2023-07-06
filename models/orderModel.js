@@ -1,4 +1,4 @@
-const mongoose = require("mongoose"); // Erase if already required
+const mongoose = require("mongoose");
 
 // Declare the Schema of the Mongo model
 var orderSchema = new mongoose.Schema(
@@ -42,11 +42,11 @@ var orderSchema = new mongoose.Schema(
     paymentInfo: {
       flutterwaveOrderId: {
         type: String,
-        required: true,
+        required: false,
       },
       flutterwavePaymentId: {
         type: String,
-        required: true,
+        required: false,
       },
     },
     orderItems: [
